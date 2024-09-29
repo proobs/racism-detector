@@ -34,12 +34,12 @@ def train_model(name):
     with open(racism_json, 'r') as f:
         data = json.load(f)
     
-    # Assuming data is already a list of sentences (each sentence as a list of words)
     cores = multiprocessing.cpu_count()
+    tokenized_data = [sentence.split() for sentence in data]
     
     # Initialize Word2Vec model
     model = Word2Vec(
-        sentences=data,
+        sentences=tokenized_data,
         min_count=5,
         window=2,
         size=500,
